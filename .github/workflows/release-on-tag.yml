@@ -7,8 +7,6 @@ on:
         required: false
         type: string
 
-    secrets: inherit
-
 jobs:
   release:
     runs-on: ubuntu-latest
