@@ -1,0 +1,44 @@
+name: release-on-tag
+
+on:
+  workflow_call:
+    inputs:
+      repository:
+        required: false
+        type: string
+
+    secrets: inherit
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log repository
+        run: echo 'Repository ${{ github.repository }}'
+
+      - name: Log ref name
+        run: echo 'Branch ${{ github.ref_name }}'
+
+      - name: Log event
+        run: echo '${{ toJSON(github.event) }}'
+      # - name: Clone repository
+      #   uses: actions/checkout@v3
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+
+      # - name: Setup custom registry
+      #   run: |
+      #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGE_TOKEN }}" > .npmrc && echo "@30SAS:registry=https://npm.pkg.github.com" >> .npmrc
+
+      # - name: Install dependencies
+      #   run: npm i -f
+
+      # - name: Match release version with tag
+      #   run: node scripts/match-release-tag.js ${{ github.ref_name }}
+
+      # - name: Build and publish package
+      #   run: npm publish ${{ (contains(github.ref, 'beta') && '--tag beta') || '' }}
